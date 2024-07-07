@@ -8,22 +8,24 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.musicappui.ui.theme.AccountView
 
 @Composable
 fun Navigation(navController: NavController, viewModel: MainViewModel, pd: PaddingValues){
 
-    NavHost(navController = navController as NavHostController,
-        startDestination = Screen.DrawerScreen.AddAccount.route,
-        modifier = Modifier.padding(pd)) {
+    NavHost(
+        navController = navController as NavHostController,
+        startDestination = Screen.DrawerScreen.Account.route,
+        modifier = Modifier.padding(pd)
+    ) {
 
-        composable(Screen.DrawerScreen.AddAccount.route) {
-
+        composable(Screen.DrawerScreen.Account.route) {
+            AccountView()
         }
 
         composable(Screen.DrawerScreen.Subscribe.route) {
 
         }
-
     }
 
 }

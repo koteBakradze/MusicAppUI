@@ -60,10 +60,14 @@ fun MainView(){
         mutableStateOf(currentScreen.title)
     }
 
+    val dialogOpen = remember {
+        mutableStateOf(false)
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Home") },
+                title = { Text(title.value) },
                 navigationIcon = { IconButton(onClick = {
                     // open the drawer
                     scope.launch {
@@ -82,10 +86,11 @@ fun MainView(){
                             scaffoldState.drawerState.close()
                         }
                         if (item.dRoute == "add_account") {
-                            //open dialogue
+                            dialogOpen.value = true
                         } else {
                             controller.navigate(item.dRoute)
                             title.value = item.dTitle
+
                         }
                     }
                 }
@@ -93,6 +98,8 @@ fun MainView(){
         }
     ) {
         Navigation(navController = controller, viewModel = viewModel, pd = it)
+        
+        AccountDialog(dialogOpen = dialogOpen)
     }
 }
 
