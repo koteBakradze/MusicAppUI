@@ -3,6 +3,7 @@ package com.example.musicappui.ui.theme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,7 +24,7 @@ import com.example.musicappui.R
 fun AccountView(){
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxHeight()
             .padding(16.dp)
     ) {
         Row(

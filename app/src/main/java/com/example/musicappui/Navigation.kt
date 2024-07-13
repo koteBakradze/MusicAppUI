@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.musicappui.ui.theme.AccountView
+import com.example.musicappui.ui.theme.SubscriptionView
 
 @Composable
 fun Navigation(navController: NavController, viewModel: MainViewModel, pd: PaddingValues){
@@ -24,7 +25,7 @@ fun Navigation(navController: NavController, viewModel: MainViewModel, pd: Paddi
         }
 
         composable(Screen.DrawerScreen.Subscribe.route) {
-
+            SubscriptionView()
         }
     }
 

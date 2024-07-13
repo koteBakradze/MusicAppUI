@@ -5,8 +5,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -34,6 +38,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.musicappui.MainViewModel
 import com.example.musicappui.Navigation
 import com.example.musicappui.Screen
+import com.example.musicappui.screensInBottom
 import com.example.musicappui.screensInDrawer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -64,7 +69,31 @@ fun MainView(){
         mutableStateOf(false)
     }
 
+    val bottomBar: @Composable () -> Unit = {
+        if (currentScreen is Screen.DrawerScreen || currentScreen == Screen.BottomScreen.Home){
+            BottomNavigation(Modifier.wrapContentSize()) {
+                screensInBottom.forEach{
+                    item ->
+                        BottomNavigationItem(
+                            selected = currentRoute == item.bRoute,
+                            onClick = { controller.navigate(item.bRoute) },
+                            icon = { Icon(
+                                painter = painterResource(id = item.icon),
+                                contentDescription = item.bTitle)
+                            },
+                            label = { Text(text = item.bTitle)},
+                            selectedContentColor = Color.White,
+                            unselectedContentColor = Color.Black
+                            )
+                }
+            }
+        }
+    }
+
+
     Scaffold(
+        bottomBar = bottomBar,
+
         topBar = {
             TopAppBar(
                 title = { Text(title.value) },
@@ -109,7 +138,7 @@ fun DrawerItem(
     item: Screen.DrawerScreen,
     onDrawerItemClicked: () -> Unit
 ){
-    val background = if(selected) Color.DarkGray else Color.White
+    val background = if(selected) Color.Black else Color.White
     Row(
         Modifier
             .fillMaxSize()
